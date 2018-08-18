@@ -1,21 +1,21 @@
 # RChain Co-op Processes in Rholang
 
 ## Overview
-This project explores the use of Rholang as a language for expressing business processes. In particular, the business processes of the RChain Cooperative. If you're new to RChain, see the FAQ.
+This project explores the use of Rholang as a language for expressing business processes. In particular, the business processes of the RChain Cooperative. If you're new to RChain, see the FAQ (below).
 
 ## The Benefit to the Co-op
 * Improve communication and transparency of co-op processes
-* Establish collaborative environment for discussing and affecting co-op processes
-* Proof of concept use of RChain for human processes
+* Establish collaborative environment for discussing and effecting co-op processes
+* Proof of concept of RChain for human processes
 * Improve co-op processes
 * Improve RChain and Rholang by exercising its capabilities
-* Ultimately, to execute and automate co-op processes
+* To execute and automate co-op processes
 * Ultimately, contribute to the platform co-op
 
 ## Why use Rholang to Express RChain Co-op Processes?
 
 ### Fitness of Computational Model
-Rholang is based on message passing and human processes involve either sending a message or receiving a message, i.e., submitting a statement of work, approving an invoice, casting a vote, etc.
+Rholang is based on message passing. Human processes involve either sending a message or receiving a message, i.e., submitting a statement of work, approving an invoice, casting a vote, etc.
 
 ### Formal Language
 It's debatable if formal languages are better for expressing human processes. In this project both formal and natural languages will be used. The goal is not to make robots of co-op members, but to take advantage of the rigor required in expressing processes in a computable language to improve the processes themselves and the shared understanding of them. 
