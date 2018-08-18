@@ -26,7 +26,7 @@ The RChain compute platform is described as a coordination technology. It can su
 ## FAQ
 **What is RChain?**
 
-RChain is a blockchain computer, a virtual computer distributed across a global network of nodes each running the RChain protocol. These nodes come to concensus through economic incentives to agree on the execution of the programs running on the platform. See https://rchain.coop
+RChain is a blockchain computer, a virtual computer distributed across a global network of nodes each running the RChain protocol. These nodes come to consensus through economic incentives to agree on the execution of the programs running on the platform. See https://rchain.coop
 
 **What is Rholang?**
 
@@ -42,7 +42,7 @@ A process is a series of steps or actions but, because of the message passing na
 
 **How can I contribute?**
 
-* File tikects to discuss the design of co-op processes
+* File tickets to discuss the design of co-op processes
 * Write Rholang for co-op processes
 * Build supporting infrastructure to connect the Rholang processes with the outside (off-chain) world.
 
