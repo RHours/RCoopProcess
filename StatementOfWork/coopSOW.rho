@@ -1,0 +1,44 @@
+// (brainstorming on "Benefit to RChain")
+//  - show what business process modeling in Rholang looks like
+//    expression of will, sentiment
+//  - actually consult with coop folks responsible for processes
+//  - transparency into Coop business processes (e.g. how do
+//    I get an SOW approved?)
+
+// design constraints / method / approach
+// start with re-playable "cold" transactions in github
+// reporting: publishing with github, markdown
+
+// example
+
+new hr, finance, strategy, approvedCh in {
+  approvedCh!(Set())
+  |
+  // A statement of work must be approved by hr, finance, and strategy
+  // ISSUES:
+  // what about spam? (include a deposit with submission?)
+  // can you always submit?
+  // visibility of proposals?
+  // SLA? timing expectations? timeouts?
+  contract statementOfWorkApproval(statement) {
+    // post new statement somewhere for visibility?
+
+    for (@[true, "contractor; not employee", statement] <- hr;
+      @[true, "we have the money", statement] <- finance;
+      @[true, "strategically aligned", statement] <- strategy) {
+      for (approved <- approvedCh) {
+        approvedCh!(approved.add(statement))
+      }
+    }
+  }
+
+  |
+  // example 1
+  statementOfWorkApproval(`https://docs.google/sow1`)
+  |
+  hr!([true, "contractor; not employee"], `https://docs.google/sow1`)
+  |
+  strategy!([true, "strategically aligned"], `https://docs.google/sow1`)
+  |
+  finance!([true, "we have the money"], `https://docs.google/sow1`)
+}
