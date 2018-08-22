@@ -1,0 +1,23 @@
+
+// Examples here are generated from the grammar file
+// at: https://github.com/rchain/rchain/blob/dev/rholang/src/main/bnfc/rholang_mercury.cf
+
+// Examples of processes of type PChoice
+
+// PChoice.         Proc2  ::= "select" "{" [Branch] "}" ;
+// -- Select Branches
+// BranchImpl. Branch ::= ReceiptLinearImpl "=>" Proc3 ;
+// separator nonempty Branch "" ;
+
+
+
+new x, stdout(`rho:io:stdout`) in {
+    // Error: Compilation of construct not yet supported.
+    select
+    {
+        rx <- x => stdout!("Received on x")
+        ry <- y => stdout!("Received on y")
+    } |
+
+    y!("foo")
+}

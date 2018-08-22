@@ -1,0 +1,120 @@
+
+// Examples here are generated from the grammar file
+// at: https://github.com/rchain/rchain/blob/dev/rholang/src/main/bnfc/rholang_mercury.cf
+
+// Examples of processes of type PInput
+
+
+// PInput.          Proc2  ::= "for" "(" Receipt ")" "{" Proc "}" ;
+
+// -- Receipt
+// ReceiptLinear.    Receipt ::= ReceiptLinearImpl ;
+// ReceiptRepeated.  Receipt ::= ReceiptRepeatedImpl ;
+
+// -- Linear Receipts
+// LinearSimple. ReceiptLinearImpl ::= [LinearBind] ;
+// -- Implementing this will be tricky.
+// -- for (x <- a; y <- b if *x)
+
+// -- LinearCond.   Linear ::= [LinearBind] "if" Proc ;
+
+// -- Single Linear Bind
+// LinearBindImpl. LinearBind ::= [Name] NameRemainder "<-" Name ;
+// separator nonempty LinearBind ";" ;
+
+// NameRemainderVar.   NameRemainder ::= "..." "@" ProcVar ;
+// NameRemainderEmpty. NameRemainder ::= "" ;
+
+
+// -- Repeated Receipts
+// RepeatedSimple. ReceiptRepeatedImpl ::= [RepeatedBind] ;
+
+// -- Single Repeated Bind
+// RepeatedBindImpl. RepeatedBind ::= [Name] NameRemainder "<=" Name ;
+// separator nonempty RepeatedBind ";" ;
+
+
+new x, stdout(`rho:io:stdout`) in {
+    // Simple receive, one channel
+    for (r <- x) { stdout!(*r) } |
+    x!("Simple receive, one channel")
+} |
+
+
+new x, stdout(`rho:io:stdout`) in {
+    // Simple receive, one channel, discard what is received
+    for (_ <- x) { stdout!("Discarded receive") } |
+    x!("will be discarded")
+} |
+
+new x, y, stdout(`rho:io:stdout`) in {
+    // Simple receive, two channels
+    // Must receive on both x and y
+    for (rx <- x; ry <- y) { 
+        stdout!(*rx) | stdout!(*ry) 
+    } |
+    x!("Send on x") |
+    y!("Send on y")
+} |
+
+new x, stdout(`rho:io:stdout`) in {
+    // Simple receive, one channel
+    // Receive as quoted name
+    for (@rx <- x) { 
+        stdout!(rx) // note no need for eval (i.e. '*rx')
+    } |
+    x!("Send on x, quoted example")
+} |
+
+new x, stdout(`rho:io:stdout`) in {
+    // Simple receive, one channel
+    // Match on literal
+    for (@108 <- x) { 
+        stdout!("Received 108")
+    } |
+    x!(108)
+} |
+
+new x, stdout(`rho:io:stdout`) in {
+    // Simple receive, one channel
+    // Match on multiple literals on same channel
+    for (@108 <- x; @"foo" <- x) { 
+        stdout!("Received 108, and foo")
+    } |
+    x!(108) |
+    x!("foo")
+} |
+
+new x, stdout(`rho:io:stdout`) in {
+    // Simple receive, one channel
+    // Match multiple sends of literals on same channel
+    for (@108 <- x; @"foo" <- x) { 
+        stdout!("Received 108, and foo")
+    } |
+    x!(108) |
+    x!("foo")
+} |
+
+new x, stdout(`rho:io:stdout`) in {
+    // Simple receive, one channel
+    // Polyadic receive, first argument goes to 'r'
+    // Remaining arguments given as list even when just one remaining
+    for (r ... @nr <- x) { 
+        stdout!(*r) |
+        stdout!(nr)
+    } |
+    x!("Polyadic 1 R1", "Polyadic 1 R2")
+} |
+
+new x, stdout(`rho:io:stdout`) in {
+    // Simple receive, one channel
+    // Polyadic receive, first argument goes to 'r'
+    // Remaining arguments given as list if more than one
+    for (r ... @nr <- x) { 
+        stdout!(*r) |
+        stdout!(nr)
+    } |
+    x!("Polyadic 2 R1", "Polyadic 2 R2", "Polyadic 2 R3")
+} |
+
+Nil

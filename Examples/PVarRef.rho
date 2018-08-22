@@ -1,0 +1,14 @@
+
+// Examples here are generated from the grammar file
+// at: https://github.com/rchain/rchain/blob/dev/rholang/src/main/bnfc/rholang_mercury.cf
+
+// Examples of processes of type PCollect
+
+
+// PVarRef.         Proc13 ::= VarRefKind Var ;
+
+// -- VarRefKind:
+// VarRefKindProc. VarRefKind ::= "=" ;
+// VarRefKindName. VarRefKind ::= "=" "*" ;
+
+Nil

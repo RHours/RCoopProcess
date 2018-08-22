@@ -1,0 +1,49 @@
+// Examples here are generated from the grammar file
+// at: https://github.com/rchain/rchain/blob/dev/rholang/src/main/bnfc/rholang_mercury.cf
+
+// Examples of processes of type PCollect
+
+
+// -- Collections:
+
+// CollectList.   Collection ::= "[" [Proc] ProcRemainder "]" ;
+[] |                 // an empty collection
+[ true ] |           // collection with one item
+[ 1, 2, 3 ] |        // collection with three integers
+[ 8, false, `http://example.com`] |        // example with three different types
+
+// Using remainder
+// ProcRemainderVar.   ProcRemainder ::= "..." ProcVar ;
+// ProcRemainderEmpty. ProcRemainder ::= "" ;
+
+new x in {
+    // match remainder to wildcard '_'
+    for (@[ 8, false, ... _ ] <- x) { true } |
+
+    // match remainder to var 'r'
+    for (@[ 8, false, ... r ] <- x) { true } 
+} |
+
+// CollectTuple.  Collection ::= Tuple;
+// TupleSingle.    Tuple ::= "(" Proc ",)" ;
+// TupleMultiple.  Tuple ::= "(" Proc "," [Proc] ")" ;
+( 1, "hello") |      // Tuple with two items
+( true, 8, "hi") |   // Tuple with three items
+( false,) |          // Tuple with one item
+
+// CollectSet.    Collection ::= "Set" "(" [Proc] ")" ;
+Set() |              // An empty set
+Set(1) |             // A set with one item
+Set( (1,2,3) ) |     // A set with one item that is a tuple of three items
+Set(1).add(2) |      // A set with two items
+Set(1).add(2).add(3) |     // A set with three items
+
+// CollectMap.    Collection ::= "{" [KeyValuePair] "}" ;
+// KeyValuePairImpl.  KeyValuePair ::= Proc ":" Proc ;
+// separator KeyValuePair "," ;
+{ } |                // An empty map
+{ 1:"hi" } |         // A map with one pair, mapping 1 to "hi" 
+{ true:"yup",
+  false:"nope" } |   // A map with two pairs, with silly mappings
+
+0

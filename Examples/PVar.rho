@@ -1,0 +1,22 @@
+// Examples here are generated from the grammar file
+// at: https://github.com/rchain/rchain/blob/dev/rholang/src/main/bnfc/rholang_mercury.cf
+
+// Examples of processes of type PVar.
+
+
+// -- Process variables
+// ProcVarWildcard. ProcVar ::= "_" ;
+// ProcVarVar.      ProcVar ::= Var ;
+// token Var (((letter | '\'') (letter | digit | '_' | '\'')*)|(('_') (letter | digit | '_' | '\'')+)) ;
+
+new x, y, stdout(`rho:io:stdout`) in {
+  // Use the wildcard
+  for (_ <- x) { true } |
+
+  // Receive a process over a channel and execute it
+  for (v <- y) { *v } |
+  y!(stdout!("hello"))
+
+}
+
+

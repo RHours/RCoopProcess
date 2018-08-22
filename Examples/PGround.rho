@@ -1,0 +1,29 @@
+
+// Examples here are generated from the grammar file
+// at: https://github.com/rchain/rchain/blob/dev/rholang/src/main/bnfc/rholang_mercury.cf
+
+// Examples of processes of type PGround
+
+// -- Booleans:
+// BoolTrue.   Bool ::= "true" ;
+// BoolFalse.  Bool ::= "false" ;
+// -- Ground types:
+// GroundBool.    Ground ::= Bool ;
+// GroundInt.     Ground ::= Integer ;
+// GroundString.  Ground ::= String ;
+// GroundUri.     Ground ::= Uri ;
+// token Uri ('`' ((char - ["\\`"]) | ('\\' ["`\\"]))* '`') ;
+
+
+// GroundBool
+true | false |
+
+// GroundInt
+0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 20192 | -3983 |
+
+// GroundString
+"" | "X" | "Hello" |
+
+// GroundUri
+`http://example.com`
+

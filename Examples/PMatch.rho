@@ -1,0 +1,48 @@
+
+// Examples here are generated from the grammar file
+// at: https://github.com/rchain/rchain/blob/dev/rholang/src/main/bnfc/rholang_mercury.cf
+
+// Examples of processes of type PMatch
+
+// PMatch.          Proc2  ::= "match" Proc4 "{" [Case] "}" ;
+// -- Match Cases
+// CaseImpl. Case ::= Proc13 "=>" Proc3 ;
+// separator nonempty Case "" ;
+
+new x, stdout(`rho:io:stdout`) in {
+  // Match on a simple value
+  for (@rx <- x) {
+    match rx {
+      1 => { stdout!("Received a 1") }
+      2 => { stdout!("Received a 2") }
+      3 => { stdout!("Received a 3") }
+    }
+  } |
+  x!(2)
+} |
+
+new x, stdout(`rho:io:stdout`) in {
+  // Match on an expression
+  for (@rx <- x) {
+    match rx < 3 {
+      true => { stdout!("rx is < 3") }
+      false => { stdout!("rx not < 3") }
+    }
+  } |
+  x!(2)
+} |
+
+new x, stdout(`rho:io:stdout`) in {
+  // Match on a matches expression
+  for (@rx <- x) {
+    match rx matches 1 {
+      true => { stdout!("rx matches 1") }
+      false => { stdout!("rx does not match 1") }
+    }
+  } |
+  x!(1)
+} |
+
+
+
+Nil
