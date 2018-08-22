@@ -9,8 +9,8 @@ This project explores the use of Rholang as a language for expressing business p
 * Proof of concept of RChain for human processes
 * Improve co-op processes
 * Improve RChain and Rholang by exercising its capabilities
-* To execute and automate co-op processes
-* Ultimately, contribute to the platform co-op
+* Eventually, to execute and automate co-op processes
+* Contribute to the platform co-op
 
 ## Why use Rholang to Express RChain Co-op Processes?
 
